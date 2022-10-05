@@ -54,6 +54,7 @@
         <details>
           <summary><strong>Casos de uso</strong></summary>
         <div align="left">
+        <hr>
         <details>
           <summary><strong>Admin</strong></summary>
           <br/>
@@ -211,7 +212,7 @@
       <span>Task 1 : CRUD de sistema, relacionamentos entre entidades, encaminhamento de consulta do atendente para médico.</span>
       <p>- Back-End:</p>
       <ul>
-        <li>//TODO Configuração com banco de dados H2 para testes.
+        <li>Configuração com banco de dados H2 para testes.
         </li>
         <li>//TODO Criação das entidades e mapeamento Hibernate/Validation.
         </li>
@@ -234,7 +235,7 @@
       </ul>
       <p>- Front-End:</p>
       <ul>
-        <li>//TODO Configuração bootstrap.
+        <li>Configuração bootstrap.
         </li>
         <li>//TODO View admin-profile: views de cadastro para novo atendente, médico.
         </li>
