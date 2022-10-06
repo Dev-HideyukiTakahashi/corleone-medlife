@@ -216,7 +216,7 @@
         </li>
         <li>//TODO Criação das entidades e mapeamento Hibernate/Validation.
         </li>
-        <li>//TODO Criação de todos repositórios.
+        <li>Criação de todos repositórios.
         </li>
         <li>//TODO Criação de todos controllers, pelo menos com o método 'find' para testar relacionamentos com postman.
         </li>

@@ -1,7 +1,13 @@
 package br.com.corleone.medlife.model.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
@@ -12,6 +18,7 @@ import lombok.Setter;
 @PrimaryKeyJoinColumn(name = "id")
 @Getter
 @Setter
+@Table(name = "tb_medicos")
 public class Medico extends Usuario {
 
   public Medico() {
@@ -28,5 +35,8 @@ public class Medico extends Usuario {
 
   @NotNull
   private Integer crm;
+
+  @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL)
+  private List<Consulta> consultas = new ArrayList<>();
 
 }
