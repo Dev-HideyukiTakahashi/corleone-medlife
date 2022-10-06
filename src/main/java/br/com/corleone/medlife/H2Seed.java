@@ -55,7 +55,7 @@ public class H2Seed implements CommandLineRunner {
 
     Usuario u1 = new Usuario("admin", "123", "Administrador", "11-947145854");
     u1.setRole(r1);
-    Usuario u2 = new Usuario("usuario2", "123", "Valentina SIlva", "11-98574514");
+    Usuario u2 = new Usuario("usuario2", "123", "Valentina Silva", "11-98574514");
     u2.setRole(r3);
 
     Consulta c1 = new Consulta();

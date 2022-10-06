@@ -32,12 +32,13 @@
               <div class="card card-plain">
                 <div class="card-header">
                   <h4 class="card-title">Usuarios do Sistema</h4>
-                  <form class="form-inline my-2 my-lg-0">
+                  <form class="form-inline my-2 my-lg-0" action="/admin/buscar">
                     <input
                       class="form-control mr-sm-2"
                       type="search"
                       placeholder="Digite o nome"
                       aria-label="Search"
+                      name="nome"
                     />
                     <button
                       class="btn btn-outline-success my-2 my-sm-0"
@@ -48,10 +49,13 @@
                     <button
                       class="btn btn-outline-success my-2 my-sm-0"
                       type="button"
+                      data-toggle="modal"
+                      data-target="#modal-cadastro"
                     >
                       Novo Usuário
                     </button>
                   </form>
+                  <span class="ml-2" th:text="${msg}"></span>
                 </div>
                 <div class="card-body mt-3">
                   <div class="table-responsive">
@@ -94,6 +98,86 @@
     </div>
     <!--Colortheme fragment-->
     <div th:replace="fragments/colortheme :: colortheme"></div>
+    <!-- Modal Novo usuário -->
+    <div
+      class="modal fade"
+      id="modal-cadastro"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modal-cadastroLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="exampleModalLabel">
+              Cadastrar Usuário
+            </h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="display: inline-block">
+            <form>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label>Login</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    style="color: black"
+                    placeholder="username"
+                  />
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Senha</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    style="color: black"
+                    placeholder="password"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Nome</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  style="color: black"
+                  placeholder="nome do usuário"
+                />
+              </div>
+              <div class="form-group">
+                <label>Cargo</label>
+                <select class="custom-select" style="color: black">
+                  <option selected>Selecione o cargo</option>
+                  <option
+                    th:each=" r : ${roles}"
+                    th:text="${r.roleType}"
+                  ></option>
+                </select>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Fechar
+            </button>
+            <button type="button" class="btn btn-primary">Salvar</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <!--Javascript fragment-->
     <div th:replace="fragments/javascript :: javascript"></div>
   </body>
