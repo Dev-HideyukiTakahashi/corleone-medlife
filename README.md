@@ -218,7 +218,7 @@
         </li>
         <li>Criação de todos repositórios.
         </li>
-        <li>//TODO Criação de todos controllers, pelo menos com o método 'find' para testar relacionamentos com postman.
+        <li>//TODO Criação de todos controllers, pelo menos com o método 'find' para testar relacionamentos.
         </li>
         <li>//TODO Database seeding para testes.
         </li>

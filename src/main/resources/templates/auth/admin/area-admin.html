@@ -1,0 +1,100 @@
+<!--
+=========================================================
+* * Black Dashboard - v1.0.1
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/black-dashboard
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <!--Fragmento Head-->
+  <div th:replace="fragments/head :: head"></div>
+
+  <body class="">
+    <div class="wrapper">
+      <!-- Sidebar Fragment -->
+      <div th:replace="fragments/sidebar :: sidebar"></div>
+      <div class="main-panel">
+        <!-- Navbar Fragment -->
+        <div th:replace="fragments/navbar :: navbar"></div>
+        <!--Main-->
+        <div class="content">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card card-plain">
+                <div class="card-header">
+                  <h4 class="card-title">Usuarios do Sistema</h4>
+                  <form class="form-inline my-2 my-lg-0">
+                    <input
+                      class="form-control mr-sm-2"
+                      type="search"
+                      placeholder="Digite o nome"
+                      aria-label="Search"
+                    />
+                    <button
+                      class="btn btn-outline-success my-2 my-sm-0"
+                      type="submit"
+                    >
+                      Buscar
+                    </button>
+                    <button
+                      class="btn btn-outline-success my-2 my-sm-0"
+                      type="button"
+                    >
+                      Novo Usuário
+                    </button>
+                  </form>
+                </div>
+                <div class="card-body mt-3">
+                  <div class="table-responsive">
+                    <table class="table tablesorter" id="">
+                      <thead class="text-primary">
+                        <tr>
+                          <th>ID</th>
+                          <th>Nome</th>
+                          <th>Telefone</th>
+                          <th>Cargo</th>
+                          <th class="text-center">Editar</th>
+                          <th class="text-center">Excluir</th>
+                        </tr>
+                      </thead>
+                      <tbody th:each=" u : ${usuarios}">
+                        <tr>
+                          <td th:text="${u.id}"></td>
+                          <td th:text="${u.nome}"></td>
+                          <td th:text="${u.telefone}"></td>
+                          <td th:text="${u.role.roleType}"></td>
+                          <td class="text-center">
+                            <a class="tim-icons icon-refresh-01" href=""></a>
+                          </td>
+                          <td class="text-center">
+                            <a class="tim-icons icon-trash-simple" href=""></a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--End Main-->
+        <!--Footer fragment-->
+        <div th:replace="fragments/footer :: footer"></div>
+      </div>
+    </div>
+    <!--Colortheme fragment-->
+    <div th:replace="fragments/colortheme :: colortheme"></div>
+    <!--Javascript fragment-->
+    <div th:replace="fragments/javascript :: javascript"></div>
+  </body>
+</html>
