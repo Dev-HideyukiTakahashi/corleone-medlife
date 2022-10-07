@@ -1,5 +1,6 @@
 package br.com.corleone.medlife.model.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,7 +11,6 @@ import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import lombok.Data;
 
@@ -25,26 +25,23 @@ public class Usuario {
   private Long id;
 
   @NotNull
-  @Size(min = 3, message = "Usuario precisa de no mínimo 3 caracteres")
+  @Column(unique = true)
   private String username;
 
   @NotNull
-  @Size(min = 3, message = "Senha precisa de no mínimo 3 caracteres")
   private String password;
 
   @NotNull
-  @Size(min = 2, message = "Nome deve ter no mínimo 2 caracteres")
   private String nome;
 
   @NotNull
-  @Size(min = 8, max = 14, message = "Preencha um telefone válido")
   private String telefone;
 
   @Lob
   private Byte foto;
 
   @OneToOne
-  private Roles role;
+  private Roles role = new Roles();
 
   public Usuario() {
 

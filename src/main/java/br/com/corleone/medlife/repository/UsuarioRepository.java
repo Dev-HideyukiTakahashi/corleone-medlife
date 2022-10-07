@@ -10,4 +10,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
   public List<Usuario> findByNomeContainsIgnoreCase(String nome);
 
+  public Boolean existsByUsername(String username);
+
 }

@@ -71,16 +71,16 @@ public class H2Seed implements CommandLineRunner {
     c2.setStatus(Status.REMARCADA);
 
     Consulta c3 = new Consulta();
-    c2.setData(LocalDateTime.parse("2022-10-22T22:30:26"));
-    c2.setTriagem("Paciente não compareceu a consulta.");
-    c2.setHistorico("...");
-    c2.setStatus(Status.CANCELADA);
+    c3.setData(LocalDateTime.parse("2022-10-22T22:30:26"));
+    c3.setTriagem("Paciente não compareceu a consulta.");
+    c3.setHistorico("...");
+    c3.setStatus(Status.CANCELADA);
 
     Consulta c4 = new Consulta();
-    c2.setData(LocalDateTime.parse("2022-10-13T22:30:26"));
-    c2.setTriagem("Paciente cm muita dor na coluna");
-    c2.setHistorico("Primeira consulta");
-    c2.setStatus(Status.MARCADA);
+    c4.setData(LocalDateTime.parse("2022-10-13T22:30:26"));
+    c4.setTriagem("Paciente cm muita dor na coluna");
+    c4.setHistorico("Primeira consulta");
+    c4.setStatus(Status.MARCADA);
 
     Paciente p1 = new Paciente("Maria", "41547485785", "11985744547", "maria@gmail.com",
         "Avenida das nações unidas 221, apt 12", "Feminino", 58, LocalDate.parse("1965-11-25"));
@@ -93,18 +93,13 @@ public class H2Seed implements CommandLineRunner {
 
     c1.setMedico(m1);
     c2.setMedico(m2);
+    c3.setMedico(m1);
+    c4.setMedico(m2);
 
     c1.setPaciente(p1);
     c2.setPaciente(p2);
     c3.setPaciente(p3);
     c4.setPaciente(p4);
-
-    p1.getConsultas().add(c1);
-    p2.getConsultas().add(c2);
-    p3.getConsultas().add(c3);
-    p4.getConsultas().add(c4);
-    m1.getConsultas().add(c1);
-    m2.getConsultas().add(c2);
 
     pacienteRepository.saveAll(Arrays.asList(p1, p2, p3, p4));
     medicoRepository.saveAll(Arrays.asList(m1, m2));

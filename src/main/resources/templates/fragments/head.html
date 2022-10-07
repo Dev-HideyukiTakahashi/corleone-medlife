@@ -20,5 +20,20 @@
     <link href="/css/nucleo-icons.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link href="/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+
+    <!-- Removendo as setas laterais do tipo 'number' em HTML -->
+    <style type="text/css">
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      input[type="number"] {
+        -moz-appearance: textfield; /* Firefox */
+      }
+      .modal-lg {
+        max-width: 50%;
+      }
+    </style>
   </head>
 </html>
