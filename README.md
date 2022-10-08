@@ -214,15 +214,15 @@
       <ul>
         <li>Configuração com banco de dados H2 para testes.
         </li>
-        <li>//TODO Criação das entidades e mapeamento Hibernate/Validation.
+        <li>Criação das entidades e mapeamento Hibernate/Validation.
         </li>
         <li>Criação de todos repositórios.
         </li>
         <li>//TODO Criação de todos controllers, pelo menos com o método 'find' para testar relacionamentos.
         </li>
-        <li>//TODO Database seeding para testes.
+        <li>Database seeding para testes.
         </li>
-        <li>//TODO Controller com CRUD completo para entidades médico, paciente, atendente, consulta,relatórios com testes no postman.
+        <li>//TODO Controller com CRUD completo para entidades médico, paciente, atendente, consulta,relatórios com testes no h2.
         </li>
         <li>//TODO Delete apenas para relatórios, consulta.
         </li>
@@ -237,9 +237,9 @@
       <ul>
         <li>Configuração bootstrap.
         </li>
-        <li>//TODO View admin-profile: views de cadastro para novo atendente, médico.
+        <li> View admin-profile: views de cadastro para novo atendente, médico.
         </li>
-        <li>//TODO View admin-profile: view de lista dinâmica de todos atendentes, médicos com opção para editar e excluir.
+        <li>View admin-profile: view de lista dinâmica de todos atendentes, médicos com opção para editar e excluir.
         </li>
         <li>//TODO View atendente profile: view de cadastro para novo paciente.
         </li>
