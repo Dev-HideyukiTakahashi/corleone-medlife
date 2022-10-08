@@ -10,7 +10,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 import lombok.Data;
 
@@ -24,17 +24,17 @@ public class Usuario {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @NotNull
   @Column(unique = true)
+  @NotEmpty(message = "O username deve ser informado")
   private String username;
 
-  @NotNull
+  @NotEmpty(message = "A senha deve ser informada")
   private String password;
 
-  @NotNull
+  @NotEmpty(message = "Informe o nome do usuário.")
   private String nome;
 
-  @NotNull
+  @NotEmpty(message = "Informe o nome telefone de contato do usuário.")
   private String telefone;
 
   @Lob

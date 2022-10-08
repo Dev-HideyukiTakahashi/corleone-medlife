@@ -48,9 +48,9 @@ public class H2Seed implements CommandLineRunner {
 
     rolesRepository.saveAll(Arrays.asList(r1, r2, r3));
 
-    Medico m1 = new Medico("teste@mail.com", "11-985745412", 123, "medico1", "123", "Dr. Now");
+    Medico m1 = new Medico("teste@mail.com", "11-985745412", "2283-2", "medico1", "123", "Dr. Now");
     m1.setRole(r2);
-    Medico m2 = new Medico("teste2@mail.com", "11-921012578", 123, "medico2", "123", "Dra. Celestina");
+    Medico m2 = new Medico("teste2@mail.com", "11-921012578", "87485-2", "medico2", "123", "Dra. Celestina");
     m2.setRole(r2);
 
     Usuario u1 = new Usuario("admin", "123", "Administrador", "11-947145854");

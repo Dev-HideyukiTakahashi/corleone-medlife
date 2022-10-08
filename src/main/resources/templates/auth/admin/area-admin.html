@@ -81,6 +81,7 @@
                           <th>Cargo</th>
                           <th class="text-center">Editar</th>
                           <th class="text-center">Excluir</th>
+                          <th class="text-center">CRM</th>
                         </tr>
                       </thead>
                       <tbody th:each=" u : ${usuarios}">
@@ -89,12 +90,30 @@
                           <td th:text="${u.nome}"></td>
                           <td th:text="${u.telefone}"></td>
                           <td th:text="${u.role.roleType}"></td>
+
                           <td class="text-center">
-                            <a class="tim-icons icon-refresh-01" href=""></a>
+                            <a
+                              class="tim-icons icon-refresh-01"
+                              href="#"
+                              th:attr="onclick=|editarView('${u.id}','${u.nome}','${u.telefone}','${u.username}','${u.password}','${u.role.roleType}')|"
+                              data-toggle="modal"
+                              data-target="#modal-editar"
+                            ></a>
                           </td>
                           <td class="text-center">
-                            <a class="tim-icons icon-trash-simple" href=""></a>
+                            <a
+                              class="tim-icons icon-trash-simple"
+                              th:href="@{/admin/excluir/{id}(id=${u.id})}"
+                              th:data-confirm-delete="|Você gostaria de apagar ${u.nome}?|"
+                              onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false "
+                            ></a>
                           </td>
+                          <td
+                            class="text-center"
+                            th:each=" m: ${medicos}"
+                            th:if="${u.id} == ${m.id}"
+                            th:text="${m.crm}"
+                          ></td>
                         </tr>
                       </tbody>
                     </table>
@@ -123,9 +142,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title" id="exampleModalLabel">
-              Cadastrar Usuário
-            </h4>
+            <h4 class="modal-title" id="cadastro">Cadastrar Usuário</h4>
             <button
               type="button"
               class="close"
@@ -175,22 +192,41 @@
                   autocomplete="off"
                 />
               </div>
-              <div class="form-group">
-                <label>Telefone</label>
-                <input
-                  required
-                  type="number"
-                  class="form-control"
-                  style="color: black"
-                  placeholder="apenas números"
-                  name="telefone"
-                  autocomplete="off"
-                />
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label>Telefone</label>
+                  <input
+                    required
+                    type="text"
+                    class="form-control"
+                    style="color: black"
+                    placeholder="telefone"
+                    name="telefone"
+                    autocomplete="off"
+                  />
+                </div>
+                <div
+                  class="form-group col-md-6"
+                  id="mostrar-crm"
+                  style="display: none"
+                >
+                  <label>CRM</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    style="color: black"
+                    placeholder="crm"
+                    name="crm"
+                    id="salvar-crm"
+                    autocomplete="off"
+                  />
+                </div>
               </div>
               <div class="form-group">
                 <label>Cargo</label>
                 <select
                   required
+                  onchange="mostraCampo(this)"
                   class="custom-select"
                   style="
                     color: black;
@@ -215,6 +251,7 @@
                   type="button"
                   class="btn btn-secondary"
                   data-dismiss="modal"
+                  onclick="form.reset()"
                 >
                   Fechar
                 </button>
@@ -224,6 +261,149 @@
         </div>
       </div>
     </div>
+    <!-- Modal Novo usuário fim -->
+    <!-- Modal editar usuário -->
+    <div
+      class="modal fade"
+      id="modal-editar"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modal-editarLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Editar Usuário</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="display: inline-block">
+            <form th:action="@{/admin/editar}" method="POST" id="form-editar">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <input type="hidden" id="editar-id" name="id" />
+                  <label>Login</label>
+                  <input
+                    readonly
+                    id="editar-username"
+                    type="text"
+                    class="form-control"
+                    style="color: black; background-color: #bbc1d1"
+                    placeholder="username"
+                    name="username"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Senha</label>
+                  <input
+                    required
+                    id="editar-password"
+                    type="text"
+                    class="form-control"
+                    style="color: black"
+                    placeholder="password"
+                    name="password"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Nome</label>
+                <input
+                  required
+                  id="editar-nome"
+                  type="text"
+                  class="form-control"
+                  style="color: black"
+                  placeholder="nome do usuário"
+                  name="nome"
+                  autocomplete="off"
+                />
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label>Telefone</label>
+                  <input
+                    id="editar-telefone"
+                    required
+                    type="text"
+                    class="form-control"
+                    style="color: black"
+                    placeholder="telefone"
+                    name="telefone"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Cargo</label>
+                <select
+                  class="custom-select"
+                  style="
+                    color: black;
+                    border: 1px solid #2b3553;
+                    border-radius: 0.4285rem;
+                  "
+                  name="roleType"
+                  id="roleType"
+                >
+                  <option id="editar-cargo"></option>
+                </select>
+              </div>
+              <div
+                class="mt-3 row d-flex justify-content-center"
+                style="align-items: center"
+              >
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Fechar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal editar usuário fim -->
+
+    <!--Script para mostrar CRM no cadastro, se for selecionado MEDICO-->
+    <script>
+      function mostraCampo(el) {
+        var crm = document.getElementById("mostrar-crm");
+        var editar = document.getElementById("salvar-crm");
+        if (el.value === "MEDICO") {
+          crm.style.display = "block";
+          $("#salvar-crm").prop("required", true);
+        } else {
+          crm.style.display = "none";
+          $("#salvar-crm").prop("required", false);
+        }
+      }
+    </script>
+
+    <!-- Script para preencher o modal de editar-usuario -->
+    <script>
+      function editarView(id, nome, telefone, username, password, roleType) {
+        $("#editar-id").val(id);
+        $("#editar-username").val(username);
+        $("#editar-password").val(password);
+        $("#editar-nome").val(nome);
+        $("#editar-telefone").val(telefone);
+        $("#editar-cargo").text(roleType);
+      }
+    </script>
     <!--Javascript fragment-->
     <div th:replace="fragments/javascript :: javascript"></div>
   </body>
