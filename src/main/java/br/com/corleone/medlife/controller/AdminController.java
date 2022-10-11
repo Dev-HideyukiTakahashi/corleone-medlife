@@ -55,15 +55,9 @@ public class AdminController {
   }
 
   @PostMapping(path = "/salvar")
-  public ModelAndView salvar(@Valid Usuario usuario, RoleType roleType, BindingResult result, String crm) {
+  public ModelAndView salvar(Usuario usuario, RoleType roleType, String crm) {
 
     String status, msg;
-
-    if (result.hasErrors()) {
-      ModelAndView mv = view();
-      mv.addObject("erro", "Todos os campos devem ser preenchidos.");
-      return mv;
-    }
 
     if (usuarioRepository.existsByUsername(usuario.getUsername())) {
       status = "erro";
