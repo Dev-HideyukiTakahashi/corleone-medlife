@@ -2,8 +2,6 @@ package br.com.corleone.medlife.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +31,12 @@ public class AdminController {
 
   @GetMapping
   public ModelAndView adminAreaView() {
-    return view();
+    ModelAndView mv = new ModelAndView("/auth/admin/area-admin");
+
+    mv.addObject("roles", roleRepository.findAll());
+    mv.addObject("usuarios", usuarioRepository.findAll());
+    mv.addObject("medicos", medicoRepository.findAll());
+    return mv;
   }
 
   @GetMapping(path = "/buscar")
@@ -56,12 +59,12 @@ public class AdminController {
 
   @PostMapping(path = "/salvar")
   public ModelAndView salvar(Usuario usuario, RoleType roleType, String crm) {
-
-    String status, msg;
-
+    ModelAndView mv = adminAreaView();
     if (usuarioRepository.existsByUsername(usuario.getUsername())) {
-      status = "erro";
-      msg = "Já existe um usuário registrado com esse username : " + "'" + usuario.getUsername() + "'";
+
+      mv.addObject("erro", "Já existe um usuário registrado com esse username : " + "'" + usuario.getUsername() + "'");
+      return mv;
+
     } else {
       Roles role = roleRepository.findByRoleType(roleType);
       usuario.setRole(role);
@@ -74,32 +77,22 @@ public class AdminController {
       } else {
         usuarioRepository.save(usuario);
       }
-      status = "sucesso";
-      msg = "Cadastro de '" + usuario.getNome() + "' realizado com sucesso!";
+      mv.setViewName("redirect:/admin");
+      return mv;
     }
 
-    ModelAndView mv = view();
-    mv.addObject(status, msg);
-    return mv;
   }
 
   @GetMapping(path = "/excluir/{id}")
   public ModelAndView excluir(@PathVariable Long id) {
-
     usuarioRepository.deleteById(id);
-    ModelAndView mv = view();
-    mv.addObject("sucesso", "Usuário deletado com sucesso!");
-
+    ModelAndView mv = adminAreaView();
+    mv.setViewName("redirect:/admin");
     return mv;
   }
 
   @PostMapping(path = "/editar")
-  public ModelAndView editarView(@Valid Usuario usuario, RoleType roleType, BindingResult result) {
-
-    if (result.hasErrors()) {
-      ModelAndView mv = view();
-      mv.addObject("erro", "Todos os campos devem ser preenchidos.");
-    }
+  public ModelAndView editarView(Usuario usuario, RoleType roleType, BindingResult result) {
 
     Roles role = roleRepository.findByRoleType(roleType);
     usuario.setRole(role);
@@ -115,16 +108,9 @@ public class AdminController {
       usuarioRepository.save(usuario);
     }
 
-    ModelAndView mv = view();
-    mv.addObject("sucesso", "Cadastro de '" + usuario.getNome() + "' atualizado com sucesso!");
-    return mv;
-  }
+    ModelAndView mv = adminAreaView();
+    mv.setViewName("redirect:/admin");
 
-  private ModelAndView view() {
-    ModelAndView mv = new ModelAndView("/auth/admin/area-admin");
-    mv.addObject("roles", roleRepository.findAll());
-    mv.addObject("usuarios", usuarioRepository.findAll());
-    mv.addObject("medicos", medicoRepository.findAll());
     return mv;
   }
 

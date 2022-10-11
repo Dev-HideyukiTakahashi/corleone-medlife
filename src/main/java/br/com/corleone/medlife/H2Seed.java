@@ -83,13 +83,13 @@ public class H2Seed implements CommandLineRunner {
     c4.setStatus(Status.MARCADA);
 
     Paciente p1 = new Paciente("Maria", "41547485785", "11985744547", "maria@gmail.com",
-        "Avenida das nações unidas 221, apt 12", "Feminino", 58, LocalDate.parse("1965-11-25"));
+        "Feminino", 58, LocalDate.parse("1965-11-25"));
     Paciente p2 = new Paciente("João", "74854154782", "11974854147", "joao@gmail.com",
-        "Rua Tamadua Bandeira, 152", "Masculino", 28, LocalDate.parse("1994-11-25"));
+        "Masculino", 28, LocalDate.parse("1994-11-25"));
     Paciente p3 = new Paciente("Lucia", "89585975412", "11936587458", "lucia@gmail.com",
-        "Rua Oscar Dias, 52", "Feminino", 38, LocalDate.parse("1984-12-25"));
+        "Feminino", 38, LocalDate.parse("1984-12-25"));
     Paciente p4 = new Paciente("Ana", "25145748522", "11932521454", "ana@gmail.com",
-        "Rua Manoel Gonçalves 13, apt 92", "Masculino", 50, LocalDate.parse("1972-05-11"));
+        "Masculino", 50, LocalDate.parse("1972-05-11"));
 
     c1.setMedico(m1);
     c2.setMedico(m2);

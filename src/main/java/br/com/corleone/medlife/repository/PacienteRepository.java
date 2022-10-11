@@ -10,4 +10,6 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long> {
 
   List<Paciente> findByNomeContainsIgnoreCase(String nome);
 
+  boolean existsByCpf(String cpf);
+
 }

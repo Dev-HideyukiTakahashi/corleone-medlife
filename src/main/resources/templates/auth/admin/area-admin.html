@@ -32,7 +32,10 @@
               <div class="card card-plain">
                 <div class="card-header">
                   <h4 class="card-title">Usuarios do Sistema</h4>
-                  <form class="form-inline my-2 my-lg-0" action="/admin/buscar">
+                  <form
+                    class="form-inline my-2 my-lg-0"
+                    th:action="@{/admin/buscar}"
+                  >
                     <input
                       class="form-control mr-sm-2"
                       type="search"
@@ -60,12 +63,6 @@
                       th:if="${erro}"
                       style="margin-left: 15%"
                       th:text="${erro}"
-                    ></span>
-                    <span
-                      class="text-success"
-                      th:if="${sucesso}"
-                      style="margin-left: 15%"
-                      th:text="${sucesso}"
                     ></span>
                   </form>
                 </div>

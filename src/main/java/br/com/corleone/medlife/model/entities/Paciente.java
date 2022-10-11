@@ -26,9 +26,12 @@ public class Paciente {
   private String cpf;
   private String telefone;
   private String email;
-  private String endereco;
   private String sexo;
   private Integer idade;
+  private String Rua;
+  private String bairro;
+  private String cidade;
+  private String numero;
 
   private LocalDate dataNascimento;
 
@@ -38,16 +41,20 @@ public class Paciente {
   public Paciente() {
   }
 
-  public Paciente(String nome, String cpf, String telefone, String email, String endereco, String sexo, Integer idade,
+  public Paciente(String nome, String cpf, String telefone, String email, String sexo, Integer idade,
       LocalDate dataNascimento) {
     this.nome = nome;
     this.cpf = cpf;
     this.telefone = telefone;
     this.email = email;
-    this.endereco = endereco;
+
     this.sexo = sexo;
     this.idade = idade;
     this.dataNascimento = dataNascimento;
+  }
+
+  public void setDataNascimento(String data) {
+    this.dataNascimento = LocalDate.parse(data);
   }
 
 }

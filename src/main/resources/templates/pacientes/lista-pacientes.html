@@ -50,14 +50,12 @@
                     >
                       Buscar
                     </button>
-                    <button
+                    <a
                       class="btn btn-outline-success my-2 my-sm-0"
-                      type="button"
-                      data-toggle="modal"
-                      data-target="#modal-cadastro"
+                      th:href="@{/pacientes/salvar}"
                     >
                       Novo Paciente
-                    </button>
+                    </a>
                     <span class="text-warning" style="margin-left: 15%"></span>
                     <span
                       class="text-success"
@@ -77,9 +75,8 @@
                           <th>CPF</th>
                           <th>Telefone</th>
                           <th>Email</th>
-                          <th>Sexo</th>
-                          <th>Idade</th>
                           <th class="text-center">Editar</th>
+                          <th class="text-center">Detalhes</th>
                         </tr>
                       </thead>
                       <tbody th:each=" p : ${pacientes}">
@@ -88,15 +85,20 @@
                           <td th:text="${p.cpf}"></td>
                           <td th:text="${p.telefone}"></td>
                           <td th:text="${p.email}"></td>
-                          <td th:text="${p.sexo}"></td>
-                          <td th:text="${p.idade}"></td>
-
                           <td class="text-center">
                             <a
                               class="tim-icons icon-refresh-01"
                               href="#"
                               data-toggle="modal"
                               data-target="#modal-editar"
+                            ></a>
+                          </td>
+                          <td class="text-center">
+                            <a
+                              class="tim-icons icon-zoom-split"
+                              href="#"
+                              data-toggle="modal"
+                              data-target="#modal-detalhes"
                             ></a>
                           </td>
                         </tr>
