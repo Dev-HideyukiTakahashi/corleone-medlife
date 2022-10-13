@@ -1,10 +1,10 @@
 package br.com.corleone.medlife.controller;
 
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-
 import javax.validation.Valid;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,23 +26,31 @@ public class PacienteController {
   private final PacienteRepository pacienteRepository;
 
   @GetMapping
-  public ModelAndView pacientesView() {
+  public ModelAndView pacientesView(@PageableDefault(size = 7, sort = "nome") Pageable pageable) {
     ModelAndView mv = new ModelAndView("/pacientes/lista-pacientes");
-    mv.addObject("pacientes", pacienteRepository.findAll());
-    return mv;
+    Page<Paciente> pagePaciente = pacienteRepository.findAll(pageable);
 
+    mv.addObject("pacientes", pagePaciente);
+    mv.addObject("lista", true);
+
+    return mv;
   }
 
   @GetMapping(path = "/buscar")
-  public ModelAndView buscarPorNome(@RequestParam(name = "nome") String nome) {
-    List<Paciente> pacientes = pacienteRepository.findByNomeContainsIgnoreCase(nome);
+  public ModelAndView buscarPorNome(@RequestParam(name = "nomeBusca") String nomeBusca,
+      @PageableDefault(size = 7, sort = "nome") Pageable pageable) {
     ModelAndView mv = new ModelAndView("/pacientes/lista-pacientes");
-    if (pacientes.size() < 1) {
+    Page<Paciente> pagePaciente = pacienteRepository.findAllByNomeContainsIgnoreCase(nomeBusca, pageable);
+
+    if (!pagePaciente.hasContent()) {
       mv.addObject("pacientes", null);
       mv.addObject("registros", "Sem registros de pacientes.");
+      mv.addObject("lista", false);
     } else {
-      mv.addObject("registros", pacientes.size() + " registros em sistema");
-      mv.addObject("pacientes", pacientes);
+      mv.addObject("registros", pagePaciente.getTotalElements() + " registros em sistema");
+      mv.addObject("nomeBusca", nomeBusca);
+      mv.addObject("pacientes", pagePaciente);
+      mv.addObject("lista", true);
     }
 
     return mv;
@@ -52,6 +60,7 @@ public class PacienteController {
   public ModelAndView salvar() {
     ModelAndView mv = new ModelAndView("/pacientes/form-pacientes");
     mv.addObject("paciente", new Paciente());
+
     return mv;
   }
 
@@ -59,10 +68,8 @@ public class PacienteController {
   public ModelAndView editar(@PathVariable Long id) {
     ModelAndView mv = new ModelAndView("/pacientes/form-pacientes");
     Paciente paciente = pacienteRepository.findById(id).get();
-
-    String data = (paciente.getDataNascimento().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
     mv.addObject("paciente", paciente);
-    mv.addObject("data", data);
+
     return mv;
   }
 

@@ -1,6 +1,7 @@
 package br.com.corleone.medlife.model.entities;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,6 +78,13 @@ public class Paciente {
 
   public void setDataNascimento(String data) {
     this.dataNascimento = LocalDate.parse(data);
+  }
+
+  public String getDataNascimento() {
+    if (dataNascimento != null) {
+      return dataNascimento.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
+    return "";
   }
 
 }

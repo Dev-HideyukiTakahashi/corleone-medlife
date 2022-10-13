@@ -41,8 +41,9 @@
                       type="search"
                       placeholder="Digite o nome"
                       aria-label="Search"
-                      name="nome"
                       autocomplete="off"
+                      th:value="${nomeBusca}"
+                      name="nomeBusca"
                     />
                     <button
                       class="btn btn-outline-success my-2 my-sm-0"
@@ -67,7 +68,7 @@
                 </div>
                 <span class="ml-4 mt-1" th:text="${registros}"></span>
                 <div class="card-body mt-3">
-                  <div class="table-responsive">
+                  <div>
                     <table class="table tablesorter" id="">
                       <thead class="text-primary">
                         <tr>
@@ -75,6 +76,7 @@
                           <th>CPF</th>
                           <th>Telefone</th>
                           <th>Email</th>
+                          <th class="text-center">Whatssap</th>
                           <th class="text-center">Editar</th>
                           <th class="text-center">Detalhes</th>
                         </tr>
@@ -85,6 +87,13 @@
                           <td th:text="${p.cpf}"></td>
                           <td th:text="${p.telefone}"></td>
                           <td th:text="${p.email}"></td>
+                          <td class="text-center">
+                            <a
+                              th:href="@{https://api.whatsapp.com/send?phone={telefone}(telefone=${p.telefone})}"
+                              target="_blank"
+                              class="tim-icons icon-mobile"
+                            ></a>
+                          </td>
                           <td class="text-center">
                             <a
                               class="tim-icons icon-refresh-01"
@@ -103,6 +112,53 @@
                       </tbody>
                     </table>
                   </div>
+
+                  <!--Paginação-->
+                  <div class="mt-5" th:if="${lista}">
+                    <ul class="pagination justify-content-center">
+                      <li class="page-item" th:if="${pacientes.hasPrevious()}">
+                        <a
+                          class="page-link"
+                          th:href="@{/pacientes/buscar(page=${pacientes.number - 1}, nomeBusca =${nomeBusca})}"
+                          aria-label="Previous"
+                        >
+                          <span aria-hidden="true">&laquo;</span>
+                          <span class="sr-only">Anterior</span>
+                        </a>
+                      </li>
+
+                      <li
+                        class="page-item"
+                        th:each=" i: ${#numbers.sequence(0, pacientes.totalPages - 1)}"
+                      >
+                        <a
+                          style="background-color: #ba54f5"
+                          class="page-link"
+                          th:href="@{/pacientes/buscar(page=${i}, nomeBusca =${nomeBusca})}"
+                          th:if="${i == pacientes.number}"
+                          >[[${i + 1}]]</a
+                        >
+                        <a
+                          class="page-link"
+                          th:href="@{/pacientes/buscar(page=${i}, nomeBusca =${nomeBusca})}"
+                          th:if="${i != pacientes.number}"
+                          >[[${i + 1}]]</a
+                        >
+                      </li>
+
+                      <li class="page-item" th:if="${pacientes.hasNext()}">
+                        <a
+                          class="page-link"
+                          th:href="@{/pacientes/buscar(page=${pacientes.number + 1}, nomeBusca =${nomeBusca})}"
+                          aria-label="Next"
+                        >
+                          <span aria-hidden="true">&raquo;</span>
+                          <span class="sr-only">Próximo</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <!--Paginação-->
                 </div>
               </div>
             </div>

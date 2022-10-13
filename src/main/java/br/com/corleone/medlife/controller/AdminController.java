@@ -36,14 +36,15 @@ public class AdminController {
     mv.addObject("roles", roleRepository.findAll());
     mv.addObject("usuarios", usuarioRepository.findAll());
     mv.addObject("medicos", medicoRepository.findAll());
+
     return mv;
   }
 
   @GetMapping(path = "/buscar")
   public ModelAndView buscarPorNome(@RequestParam(name = "nome") String nome) {
-
     List<Usuario> usuarios = usuarioRepository.findByNomeContainsIgnoreCase(nome);
     ModelAndView mv = new ModelAndView("/auth/admin/area-admin");
+
     mv.addObject("roles", roleRepository.findAll());
     mv.addObject("medicos", medicoRepository.findAll());
 
@@ -54,17 +55,18 @@ public class AdminController {
       mv.addObject("registros", usuarios.size() + " registros em sistema");
       mv.addObject("usuarios", usuarios);
     }
+
     return mv;
   }
 
   @PostMapping(path = "/salvar")
   public ModelAndView salvar(Usuario usuario, RoleType roleType, String crm) {
     ModelAndView mv = adminAreaView();
+
     if (usuarioRepository.existsByUsername(usuario.getUsername())) {
-
       mv.addObject("erro", "Já existe um usuário registrado com esse username : " + "'" + usuario.getUsername() + "'");
-      return mv;
 
+      return mv;
     } else {
       Roles role = roleRepository.findByRoleType(roleType);
       usuario.setRole(role);
@@ -78,22 +80,23 @@ public class AdminController {
         usuarioRepository.save(usuario);
       }
       mv.setViewName("redirect:/admin");
+
       return mv;
     }
-
   }
 
   @GetMapping(path = "/excluir/{id}")
   public ModelAndView excluir(@PathVariable Long id) {
     usuarioRepository.deleteById(id);
+
     ModelAndView mv = adminAreaView();
     mv.setViewName("redirect:/admin");
+
     return mv;
   }
 
   @PostMapping(path = "/editar")
   public ModelAndView editarView(Usuario usuario, RoleType roleType, BindingResult result) {
-
     Roles role = roleRepository.findByRoleType(roleType);
     usuario.setRole(role);
 
@@ -104,7 +107,6 @@ public class AdminController {
       medico.setCrm(crm);
       medicoRepository.save(medico);
     } else {
-
       usuarioRepository.save(usuario);
     }
 

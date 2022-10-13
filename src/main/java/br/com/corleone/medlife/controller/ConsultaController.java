@@ -2,6 +2,9 @@ package br.com.corleone.medlife.controller;
 
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,18 +23,21 @@ public class ConsultaController {
   private final ConsultaRepository consultaRepository;
 
   @GetMapping
-  public ModelAndView consultasView() {
+  public ModelAndView consultasView(@PageableDefault(size = 7, sort = "id") Pageable pageable) {
     ModelAndView mv = new ModelAndView("/consultas/lista-consultas");
+    Page<Consulta> pageConsulta = consultaRepository.findAll(pageable);
 
-    mv.addObject("consultas", consultaRepository.findAll());
+    mv.addObject("consultas", pageConsulta);
+    mv.addObject("lista", true);
+
     return mv;
   }
 
   @GetMapping(path = "/buscar")
   public ModelAndView buscarPorId(@RequestParam(name = "id") Long id) {
     ModelAndView mv = new ModelAndView("/consultas/lista-consultas");
-
     Optional<Consulta> optional = consultaRepository.findById(id);
+
     if (optional.isPresent()) {
       mv.addObject("consultas", optional.get());
       mv.addObject("registros", "Consulta localizada.");
@@ -39,6 +45,8 @@ public class ConsultaController {
       mv.addObject("registros", "Consulta " + id + " não existe.");
       mv.addObject("consultas", null);
     }
+    mv.addObject("lista", false);
+
     return mv;
 
   }

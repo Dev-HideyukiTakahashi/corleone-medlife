@@ -25,7 +25,7 @@ public class Consulta {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @DateTimeFormat(pattern = "dd/MM/yyyy-HH:mm")
+  @DateTimeFormat(pattern = "dd/MM/yyyy - HH:mm")
   private LocalDateTime data;
 
   private String triagem;

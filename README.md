@@ -218,13 +218,11 @@
         </li>
         <li>Criação de todos repositórios.
         </li>
-        <li>//TODO Criação de todos controllers, pelo menos com o método 'find' para testar relacionamentos.
+        <li>Criação de todos controllers, pelo menos com o método 'find' para testar relacionamentos.
         </li>
         <li>Database seeding para testes.
         </li>
-        <li>//TODO Controller com CRUD completo para entidades médico, paciente, atendente, consulta,relatórios com testes no h2.
-        </li>
-        <li>//TODO Delete apenas para relatórios, consulta.
+        <li>//TODO Controller com CRUD completo para entidades médico, paciente, atendente, consulta, com testes no h2.
         </li>
         <li>//TODO Parte de configurações de usuário com Upload de foto de perfil, salvando no banco de dados.
         </li>
@@ -241,9 +239,9 @@
         </li>
         <li>View admin-profile: view de lista dinâmica de todos atendentes, médicos com opção para editar e excluir.
         </li>
-        <li>//TODO View atendente profile: view de cadastro para novo paciente.
+        <li>View atendente profile: view de cadastro para novo paciente.
         </li>
-        <li>//TODO View atendente profile: view de lista dinâmica com todos pacientes, com opção de editar, enviar mensagem via API whattsap.
+        <li>View atendente profile: view de lista dinâmica com todos pacientes, com opção de editar, enviar mensagem via API whattsap.
         </li>
         <li>//TODO View atendente profile: view com lista das consultas agendadas, com opção de remarcar, cancelar, encaminhar para determinado médico.
         </li>
@@ -258,6 +256,8 @@
         <li>//TODO View médico profile: view do relatório para solicitar exames ou medicamentos.
         </li>
         <li>//TODO View médico profile: ( alteração de telefone, email, foto ).
+        </li>
+        <li>Paginação das listas dinâmicas e busca de pacientes por nome.
         </li>
       </ul>
       <hr>
@@ -305,7 +305,7 @@
 <hr>
 <div align="center">
   <h3>Tecnologias utilizadas</h3>
-  <p>Java, Thymeleaf, Spring Boot, Spring MVC, Spring Security, Spring JPA, HTML, CSS, JS, Bootstrap, PostgreSQL, Maven, Tomcat 9, Git e Github<p>
+  <p>Java, Thymeleaf, Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Spring Validation, HTML, CSS, JS, Bootstrap, PostgreSQL, Maven, Tomcat 9, Git e Github<p>
 </div>
 
 </br>
