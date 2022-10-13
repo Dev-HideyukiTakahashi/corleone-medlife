@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import br.com.corleone.medlife.model.enums.Status;
 import lombok.Data;
 
@@ -23,6 +25,7 @@ public class Consulta {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @DateTimeFormat(pattern = "dd/MM/yyyy-HH:mm")
   private LocalDateTime data;
 
   private String triagem;

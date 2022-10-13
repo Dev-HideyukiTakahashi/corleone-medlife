@@ -54,7 +54,7 @@
                       class="btn btn-outline-success my-2 my-sm-0"
                       th:href="@{/consultas/salvar}"
                     >
-                      Novo Paciente
+                      Marcar Consulta
                     </a>
                     <span class="text-warning" style="margin-left: 15%"></span>
                     <span
@@ -81,11 +81,16 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>
+                        <tr th:each=" c : ${consultas}">
+                          <td th:text="${c.id}"></td>
+                          <td th:text="${{c.data}}"></td>
+                          <td th:text="${c.paciente.nome}"></td>
+                          <td th:text="${c.medico.nome}"></td>
+                          <td th:text="${c.status}"></td>
+                          <td class="text-center">
                             <a
                               class="tim-icons icon-refresh-01"
-                              th:href="@{/consultas/editar/{id}(id=${p.id})}"
+                              th:href="@{/consultas/editar/{id}(id=${c.id})}"
                             ></a>
                           </td>
                           <td class="text-center">
