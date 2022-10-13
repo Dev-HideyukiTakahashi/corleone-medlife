@@ -31,17 +31,17 @@
             <div class="col-md-12">
               <div class="card card-plain">
                 <div class="card-header">
-                  <h4 class="card-title">Pacientes em Sistema</h4>
+                  <h4 class="card-title">Consultas em Sistema</h4>
                   <form
                     class="form-inline my-2 my-lg-0"
-                    action="/pacientes/buscar"
+                    action="/consultas/buscar"
                   >
                     <input
                       class="form-control mr-sm-2"
                       type="search"
-                      placeholder="Digite o nome"
+                      placeholder="Digite o código"
                       aria-label="Search"
-                      name="nome"
+                      name="id"
                       autocomplete="off"
                     />
                     <button
@@ -52,7 +52,7 @@
                     </button>
                     <a
                       class="btn btn-outline-success my-2 my-sm-0"
-                      th:href="@{/pacientes/salvar}"
+                      th:href="@{/consultas/salvar}"
                     >
                       Novo Paciente
                     </a>
@@ -71,24 +71,21 @@
                     <table class="table tablesorter" id="">
                       <thead class="text-primary">
                         <tr>
-                          <th>Nome</th>
-                          <th>CPF</th>
-                          <th>Telefone</th>
-                          <th>Email</th>
+                          <th>Código</th>
+                          <th>Data</th>
+                          <th>Paciente</th>
+                          <th>Médico</th>
+                          <th>Status</th>
                           <th class="text-center">Editar</th>
                           <th class="text-center">Detalhes</th>
                         </tr>
                       </thead>
-                      <tbody th:each=" p : ${pacientes}">
+                      <tbody>
                         <tr>
-                          <td th:text="${p.nome}"></td>
-                          <td th:text="${p.cpf}"></td>
-                          <td th:text="${p.telefone}"></td>
-                          <td th:text="${p.email}"></td>
-                          <td class="text-center">
+                          <td>
                             <a
                               class="tim-icons icon-refresh-01"
-                              th:href="@{/pacientes/editar/{id}(id=${p.id})}"
+                              th:href="@{/consultas/editar/{id}(id=${p.id})}"
                             ></a>
                           </td>
                           <td class="text-center">
@@ -115,8 +112,16 @@
     </div>
     <!--Colortheme fragment-->
     <div th:replace="fragments/colortheme :: colortheme"></div>
+    <!-- Adicionando JQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
 
     <!--Javascript fragment-->
     <div th:replace="fragments/javascript :: javascript"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
   </body>
 </html>

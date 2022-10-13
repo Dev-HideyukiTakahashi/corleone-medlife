@@ -1,10 +1,14 @@
 package br.com.corleone.medlife.controller;
 
-import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,22 +53,35 @@ public class PacienteController {
     ModelAndView mv = new ModelAndView("/pacientes/form-pacientes");
     mv.addObject("paciente", new Paciente());
     return mv;
+  }
 
+  @GetMapping(path = "/editar/{id}")
+  public ModelAndView editar(@PathVariable Long id) {
+    ModelAndView mv = new ModelAndView("/pacientes/form-pacientes");
+    Paciente paciente = pacienteRepository.findById(id).get();
+
+    String data = (paciente.getDataNascimento().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+    mv.addObject("paciente", paciente);
+    mv.addObject("data", data);
+    return mv;
   }
 
   @PostMapping(path = "/salvar")
-  public ModelAndView salvar(Paciente paciente) {
+  public ModelAndView salvar(@Valid Paciente paciente, BindingResult result) {
     ModelAndView mv = new ModelAndView("/pacientes/form-pacientes");
 
-    if (pacienteRepository.existsByCpf(paciente.getCpf())) {
-      mv.addObject("erro", "Já existe um usuário com esse CPF");
-      return mv;
-    } else {
-
-      pacienteRepository.save(paciente);
-      mv.setViewName("redirect:/pacientes");
+    if (result.hasErrors()) {
       return mv;
     }
 
+    if (pacienteRepository.existsByCpf(paciente.getCpf()) && paciente.getId() == null) {
+      mv.addObject("erro", "Já existe um usuário com esse CPF");
+      return mv;
+    } else {
+      mv.setViewName("redirect:/pacientes");
+      pacienteRepository.save(paciente);
+      return mv;
+    }
   }
+
 }

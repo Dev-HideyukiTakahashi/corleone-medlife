@@ -44,6 +44,7 @@
                   th:object="${paciente}"
                 >
                   <div class="form-row">
+                    <input th:field="*{id}" type="hidden" name="id" />
                     <div class="form-group col-md-4">
                       <label for="nome">Nome*</label>
                       <input
@@ -54,12 +55,14 @@
                         id="nome"
                         placeholder="nome"
                         name="nome"
+                        th:errorclass="is-invalid"
                       />
+                      <span class="invalid-feedback" th:errors="*{nome}"></span>
                     </div>
-                    <span></span>
                     <div class="form-group col-md-2">
                       <label for="cpf">CPF*</label>
                       <input
+                        th:field="*{cpf}"
                         oninput="mascaraCpf(this)"
                         autocomplete="off"
                         type="text"
@@ -67,9 +70,11 @@
                         id="cpf"
                         placeholder="cpf"
                         name="cpf"
+                        th:errorclass="is-invalid"
                       />
+                      <span class="invalid-feedback" th:errors="*{cpf}"></span>
                     </div>
-                    <span></span>
+
                     <div class="form-group col-md-1">
                       <label for="idade">Idade*</label>
                       <input
@@ -80,8 +85,12 @@
                         id="idade"
                         placeholder="idade"
                         name="idade"
+                        th:errorclass="is-invalid"
                       />
-                      <span></span>
+                      <span
+                        class="invalid-feedback"
+                        th:errors="*{idade}"
+                      ></span>
                     </div>
                     <div class="form-group col-md-5"></div>
                     <div class="form-group col-md-2">
@@ -94,8 +103,12 @@
                         id="telefone"
                         placeholder="telefone"
                         name="telefone"
+                        th:errorclass="is-invalid"
                       />
-                      <span></span>
+                      <span
+                        class="invalid-feedback"
+                        th:errors="*{telefone}"
+                      ></span>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="email">Email*</label>
@@ -107,8 +120,12 @@
                         id="email"
                         placeholder="email"
                         name="email"
+                        th:errorclass="is-invalid"
                       />
-                      <span></span>
+                      <span
+                        class="invalid-feedback"
+                        th:errors="*{email}"
+                      ></span>
                     </div>
                     <div class="form-group col-md-10"></div>
                     <div class="form-group col-md-2 ml-2">
@@ -121,7 +138,8 @@
                             name="sexo"
                             id="masculino"
                             value="MASCULINO"
-                            required
+                            th:field="*{sexo}"
+                            th:errorclass="is-invalid"
                           />
                           <label class="form-check-label" for="masculino">
                             MASCULINO
@@ -134,10 +152,16 @@
                             name="sexo"
                             id="feminino"
                             value="FEMININO"
+                            th:field="*{sexo}"
+                            th:errorclass="is-invalid"
                           />
                           <label class="form-check-label" for="feminino">
                             FEMININO
                           </label>
+                          <span
+                            class="invalid-feedback"
+                            th:errors="*{sexo}"
+                          ></span>
                         </div>
                       </div>
                       <br />
@@ -152,6 +176,7 @@
                         class="form-control"
                         id="data"
                         name="dataNascimento"
+                        th:value="${data}"
                       />
                     </div>
 
