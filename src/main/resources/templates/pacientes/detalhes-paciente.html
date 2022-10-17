@@ -1,0 +1,180 @@
+<!--
+=========================================================
+* * Black Dashboard - v1.0.1
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/black-dashboard
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <!--Fragmento Head-->
+  <div th:replace="fragments/head :: head"></div>
+
+  <body class="">
+    <div class="wrapper">
+      <!-- Sidebar Fragment -->
+      <div th:replace="fragments/sidebar :: sidebar"></div>
+      <div class="main-panel">
+        <!-- Navbar Fragment -->
+        <div th:replace="fragments/navbar :: navbar"></div>
+        <!--Main-->
+        <div class="content">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">Detalhes do Paciente</h4>
+                </div>
+                <div class="card-body">
+                  <div class="form-row" th:object="${paciente}">
+                    <div class="form-group col-md-4">
+                      <label>Nome</label>
+                      <input
+                        class="form-control text-white"
+                        disabled
+                        th:field="*{nome}"
+                      />
+                    </div>
+                    <div class="form-group col-md-2">
+                      <label>CPF</label>
+                      <input
+                        th:field="*{cpf}"
+                        class="form-control text-white"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group col-md-1">
+                      <label>Idade</label>
+                      <input
+                        th:field="*{idade}"
+                        class="form-control text-white"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group col-md-5"></div>
+                    <div class="form-group col-md-2">
+                      <label>Telefone</label>
+                      <input
+                        th:field="*{telefone}"
+                        class="form-control text-white"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label>Email</label>
+                      <input
+                        th:field="*{email}"
+                        class="form-control text-white"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group col-md-11"></div>
+                    <div class="form-group col-md-2">
+                      <label>Sexo</label>
+                      <input
+                        class="form-control text-white"
+                        disabled
+                        th:field="*{sexo}"
+                      />
+                    </div>
+                    <div class="form-group col-md-2 ml-2">
+                      <label>Data de Nascimento*</label>
+                      <input
+                        class="form-control text-white"
+                        disabled
+                        th:field="*{dataNascimento}"
+                      />
+                    </div>
+                    <div class="form-group col-md-11"></div>
+                    <div class="form-group col-md-3">
+                      <label>Rua</label>
+                      <input
+                        th:field="*{rua}"
+                        class="form-control text-white"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group col-md-1">
+                      <label>Número</label>
+                      <input
+                        th:field="*{numero}"
+                        class="form-control text-white"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group col-md-10"></div>
+                    <div class="form-group col-md-3">
+                      <label>Bairro</label>
+                      <input
+                        th:field="*{bairro}"
+                        class="form-control text-white"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label>Cidade</label>
+                      <input
+                        th:field="*{cidade}"
+                        class="form-control text-white"
+                        disabled
+                      />
+                    </div>
+                  </div>
+
+                  <div class="content">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="card">
+                          <div class="card-header">
+                            <h4 class="card-title">Consultas</h4>
+                          </div>
+                          <div class="card-body">
+                            <div class="table-responsive">
+                              <table class="table tablesorter" id="">
+                                <thead class="text-primary">
+                                  <tr>
+                                    <th>Código</th>
+                                    <th>Data da Consulta</th>
+                                    <th>Status</th>
+                                    <th>Medico</th>
+                                  </tr>
+                                </thead>
+                                <tbody th:each=" c: ${consultas}">
+                                  <tr>
+                                    <td th:text="${c.id}"></td>
+                                    <td th:text="${{c.data}}"></td>
+                                    <td th:text="${c.status}"></td>
+                                    <td th:text="${c.medico.nome}"></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--End Main-->
+        <!--Footer fragment-->
+        <div th:replace="fragments/footer :: footer"></div>
+      </div>
+    </div>
+    <!--Colortheme fragment-->
+    <div th:replace="fragments/colortheme :: colortheme"></div>
+    <!--Javascript fragment-->
+    <div th:replace="fragments/javascript :: javascript"></div>
+  </body>
+</html>

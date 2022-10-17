@@ -1,5 +1,7 @@
 package br.com.corleone.medlife.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.corleone.medlife.model.entities.Consulta;
 import br.com.corleone.medlife.model.entities.Paciente;
+import br.com.corleone.medlife.repository.ConsultaRepository;
 import br.com.corleone.medlife.repository.PacienteRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -24,6 +28,7 @@ import lombok.RequiredArgsConstructor;
 public class PacienteController {
 
   private final PacienteRepository pacienteRepository;
+  private final ConsultaRepository consultaRepository;
 
   @GetMapping
   public ModelAndView pacientesView(@PageableDefault(size = 7, sort = "nome") Pageable pageable) {
@@ -89,6 +94,16 @@ public class PacienteController {
       pacienteRepository.save(paciente);
       return mv;
     }
+  }
+
+  @GetMapping(path = "/detalhes/{id}")
+  public ModelAndView detalhes(@PathVariable Long id) {
+    ModelAndView mv = new ModelAndView("/pacientes/detalhes-paciente");
+    Paciente paciente = pacienteRepository.findById(id).get();
+    mv.addObject("paciente", paciente);
+    List<Consulta> consultas = consultaRepository.findByPacienteId(id);
+    mv.addObject("consultas", consultas);
+    return mv;
   }
 
 }

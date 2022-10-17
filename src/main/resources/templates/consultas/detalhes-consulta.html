@@ -1,0 +1,113 @@
+<!--
+=========================================================
+* * Black Dashboard - v1.0.1
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/black-dashboard
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <!--Fragmento Head-->
+  <div th:replace="fragments/head :: head"></div>
+
+  <body class="">
+    <div class="wrapper">
+      <!-- Sidebar Fragment -->
+      <div th:replace="fragments/sidebar :: sidebar"></div>
+      <div class="main-panel">
+        <!-- Navbar Fragment -->
+        <div th:replace="fragments/navbar :: navbar"></div>
+        <!--Main-->
+        <div class="content">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">Detalhes da Consulta</h4>
+                </div>
+                <div class="card-body">
+                  <div class="form-row" th:object="${consulta}">
+                    <div class="form-group col-md-1">
+                      <label>Código</label>
+                      <input
+                        class="form-control text-white"
+                        disabled
+                        th:field="*{id}"
+                      />
+                    </div>
+                    <div class="form-group col-md-2">
+                      <label>Data</label>
+                      <input
+                        th:field="*{data}"
+                        class="form-control text-white"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group col-md-5">
+                      <label>Histórico</label>
+                      <input
+                        th:field="*{historico}"
+                        class="form-control text-white"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group col-md-4"></div>
+                    <div class="form-group col-md-2">
+                      <label>Status</label>
+                      <input
+                        th:field="*{status}"
+                        class="form-control text-white"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group col-md-9"></div>
+                    <div class="form-group col-md-8">
+                      <label>Triagem</label>
+                      <textarea
+                        th:field="*{triagem}"
+                        class="form-control text-white"
+                        disabled
+                      ></textarea>
+                    </div>
+                    <div class="form-group col-md-11"></div>
+                    <div class="form-group col-md-3">
+                      <label>Medico</label>
+                      <input
+                        th:field="*{medico.nome}"
+                        class="form-control text-white"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label>Paciente</label>
+                      <input
+                        th:field="*{paciente.nome}"
+                        class="form-control text-white"
+                        disabled
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--End Main-->
+        <!--Footer fragment-->
+        <div th:replace="fragments/footer :: footer"></div>
+      </div>
+    </div>
+    <!--Colortheme fragment-->
+    <div th:replace="fragments/colortheme :: colortheme"></div>
+    <!--Javascript fragment-->
+    <div th:replace="fragments/javascript :: javascript"></div>
+  </body>
+</html>

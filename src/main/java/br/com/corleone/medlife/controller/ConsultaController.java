@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -49,5 +50,14 @@ public class ConsultaController {
 
     return mv;
 
+  }
+
+  @GetMapping(path = "/detalhes/{id}")
+  public ModelAndView detalhes(@PathVariable Long id) {
+    ModelAndView mv = new ModelAndView("/consultas/detalhes-consulta");
+    Consulta consulta = consultaRepository.findById(id).get();
+    mv.addObject("consulta", consulta);
+
+    return mv;
   }
 }

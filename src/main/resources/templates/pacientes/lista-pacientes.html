@@ -103,9 +103,7 @@
                           <td class="text-center">
                             <a
                               class="tim-icons icon-zoom-split"
-                              href="#"
-                              data-toggle="modal"
-                              data-target="#modal-detalhes"
+                              th:href="@{/pacientes/detalhes/{id}(id=${p.id})}"
                             ></a>
                           </td>
                         </tr>
@@ -171,7 +169,6 @@
     </div>
     <!--Colortheme fragment-->
     <div th:replace="fragments/colortheme :: colortheme"></div>
-
     <!--Javascript fragment-->
     <div th:replace="fragments/javascript :: javascript"></div>
   </body>
