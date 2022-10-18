@@ -40,11 +40,11 @@ public class H2Seed implements CommandLineRunner {
         public void run(String... args) throws Exception {
 
                 Roles r1 = new Roles();
-                r1.setRoleType(RoleType.ADMIN);
+                r1.setRoleType(RoleType.ROLE_ADMIN);
                 Roles r2 = new Roles();
-                r2.setRoleType(RoleType.MEDICO);
+                r2.setRoleType(RoleType.ROLE_MEDICO);
                 Roles r3 = new Roles();
-                r3.setRoleType(RoleType.ATENDENTE);
+                r3.setRoleType(RoleType.ROLE_ATENDENTE);
 
                 rolesRepository.saveAll(Arrays.asList(r1, r2, r3));
 

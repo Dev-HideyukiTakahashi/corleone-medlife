@@ -25,7 +25,7 @@ public class ConsultaController {
 
   @GetMapping
   public ModelAndView consultasView(@PageableDefault(size = 7, sort = "id") Pageable pageable) {
-    ModelAndView mv = new ModelAndView("/consultas/lista-consultas");
+    ModelAndView mv = new ModelAndView("/auth/usuario/consultas/lista-consultas");
     Page<Consulta> pageConsulta = consultaRepository.findAll(pageable);
 
     mv.addObject("consultas", pageConsulta);
@@ -36,7 +36,7 @@ public class ConsultaController {
 
   @GetMapping(path = "/buscar")
   public ModelAndView buscarPorId(@RequestParam(name = "id") Long id) {
-    ModelAndView mv = new ModelAndView("/consultas/lista-consultas");
+    ModelAndView mv = new ModelAndView("/auth/usuario/consultas/lista-consultas");
     Optional<Consulta> optional = consultaRepository.findById(id);
 
     if (optional.isPresent()) {
@@ -54,7 +54,7 @@ public class ConsultaController {
 
   @GetMapping(path = "/detalhes/{id}")
   public ModelAndView detalhes(@PathVariable Long id) {
-    ModelAndView mv = new ModelAndView("/consultas/detalhes-consulta");
+    ModelAndView mv = new ModelAndView("/auth/usuario/consultas/detalhes-consulta");
     Consulta consulta = consultaRepository.findById(id).get();
     mv.addObject("consulta", consulta);
 

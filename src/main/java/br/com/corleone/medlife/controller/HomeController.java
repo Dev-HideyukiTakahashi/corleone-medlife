@@ -13,15 +13,33 @@ public class HomeController {
 
   private final MedicoRepository medicoRepository;
 
+  @GetMapping(path = { "/", "/login" })
+  public ModelAndView login(Boolean error) {
+    ModelAndView mv = new ModelAndView("/login");
+    if (error != null && error) {
+      mv.addObject("msg", "Usuário ou senha inválido!");
+    }
+
+    return mv;
+  }
+
   @GetMapping(path = "/home")
   public String home() {
-    return "home";
+    return "/auth/home";
   }
 
   @GetMapping(path = "/contatos")
   public ModelAndView contatos() {
-    ModelAndView mv = new ModelAndView("/contatos");
+    ModelAndView mv = new ModelAndView("/auth/usuario/contatos");
     mv.addObject("medicos", medicoRepository.findAll());
     return mv;
   }
+
+  @GetMapping(path = "/negado")
+  public ModelAndView acessoNegado() {
+    ModelAndView mv = new ModelAndView("/auth-acesso-negado");
+    mv.addObject("medicos", medicoRepository.findAll());
+    return mv;
+  }
+
 }

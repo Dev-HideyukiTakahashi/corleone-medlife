@@ -23,8 +23,8 @@ public class Medico extends Usuario {
   public Medico() {
   }
 
-  public Medico(String email, String telefone, String crm, String username, String password, String nome) {
-    super(username, password, nome, telefone);
+  public Medico(String email, String telefone, String crm, String login, String senha, String nome) {
+    super(login, senha, nome, telefone);
     this.email = email;
     this.crm = crm;
   }
@@ -42,8 +42,8 @@ public class Medico extends Usuario {
     if (usuario.getId() != null) {
       super.setId(usuario.getId());
     }
-    super.setUsername(usuario.getUsername());
-    super.setPassword(usuario.getPassword());
+    super.setLogin(usuario.getLogin());
+    super.setSenha(usuario.getSenha());
     super.setNome(usuario.getNome());
     super.setTelefone(usuario.getTelefone());
     super.setRole(usuario.getRole());

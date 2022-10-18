@@ -92,7 +92,7 @@
                             <a
                               class="tim-icons icon-refresh-01"
                               href="#"
-                              th:attr="onclick=|editarView('${u.id}','${u.nome}','${u.telefone}','${u.username}','${u.password}','${u.role.roleType}')|"
+                              th:attr="onclick=|editarView('${u.id}','${u.nome}','${u.telefone}','${u.login}','${u.senha}','${u.role.roleType}')|"
                               data-toggle="modal"
                               data-target="#modal-editar"
                             ></a>
@@ -301,11 +301,11 @@
                 <div class="form-group col-md-6">
                   <label>Senha</label>
                   <input
-                    required
+                    readonly
+                    style="color: black; background-color: #bbc1d1"
                     id="editar-password"
                     type="text"
                     class="form-control"
-                    style="color: black"
                     placeholder="password"
                     name="password"
                     autocomplete="off"

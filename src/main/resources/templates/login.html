@@ -1,0 +1,56 @@
+<!--Template login by 
+  Amrit-Raj Sharma
+@amrit-raj-sharma-71303-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>. . : Corleone MedLife : . .</title>
+    <!--     Fonts and icons     -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800"
+      rel="stylesheet"
+    />
+    <link
+      href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"
+      rel="stylesheet"
+    />
+    <!-- Nucleo Icons -->
+    <link href="/css/nucleo-icons.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link href="/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+    <link href="/css/login.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="loginBox">
+      <img
+        class="user"
+        src="https://i.ibb.co/yVGxFPR/2.png"
+        height="100px"
+        width="100px"
+      />
+      <h3>Entrar no Sistema</h3>
+      <form th:action="@{/login}" method="post">
+        <div class="inputBox">
+          <input id="uname" type="text" name="username" placeholder="Login" />
+          <input
+            id="pass"
+            type="password"
+            name="password"
+            placeholder="Senha"
+          />
+        </div>
+        <input type="submit" value="Login" />
+      </form>
+      <a
+        th:href="@{https://github.com/Dev-HideyukiTakahashi/corleone-medlife}"
+        target="_blank"
+        >Github<br />
+      </a>
+      <div class="text-center mt-2">
+        <p class="text-warning" th:text="${msg}">Sign-Up</p>
+      </div>
+    </div>
+  </body>
+</html>

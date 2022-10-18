@@ -63,8 +63,8 @@ public class AdminController {
   public ModelAndView salvar(Usuario usuario, RoleType roleType, String crm) {
     ModelAndView mv = adminAreaView();
 
-    if (usuarioRepository.existsByUsername(usuario.getUsername())) {
-      mv.addObject("erro", "Já existe um usuário registrado com esse username : " + "'" + usuario.getUsername() + "'");
+    if (usuarioRepository.existsByLogin(usuario.getLogin())) {
+      mv.addObject("erro", "Já existe um usuário registrado com esse login : " + "'" + usuario.getLogin() + "'");
 
       return mv;
     } else {

@@ -32,7 +32,7 @@ public class PacienteController {
 
   @GetMapping
   public ModelAndView pacientesView(@PageableDefault(size = 7, sort = "nome") Pageable pageable) {
-    ModelAndView mv = new ModelAndView("/pacientes/lista-pacientes");
+    ModelAndView mv = new ModelAndView("auth/usuario/pacientes/lista-pacientes");
     Page<Paciente> pagePaciente = pacienteRepository.findAll(pageable);
 
     mv.addObject("pacientes", pagePaciente);
@@ -44,7 +44,7 @@ public class PacienteController {
   @GetMapping(path = "/buscar")
   public ModelAndView buscarPorNome(@RequestParam(name = "nomeBusca") String nomeBusca,
       @PageableDefault(size = 7, sort = "nome") Pageable pageable) {
-    ModelAndView mv = new ModelAndView("/pacientes/lista-pacientes");
+    ModelAndView mv = new ModelAndView("auth/usuario/pacientes/lista-pacientes");
     Page<Paciente> pagePaciente = pacienteRepository.findAllByNomeContainsIgnoreCase(nomeBusca, pageable);
 
     if (!pagePaciente.hasContent()) {
@@ -63,7 +63,7 @@ public class PacienteController {
 
   @GetMapping(path = "/salvar")
   public ModelAndView salvar() {
-    ModelAndView mv = new ModelAndView("/pacientes/form-pacientes");
+    ModelAndView mv = new ModelAndView("auth/usuario/pacientes/form-pacientes");
     mv.addObject("paciente", new Paciente());
 
     return mv;
@@ -71,7 +71,7 @@ public class PacienteController {
 
   @GetMapping(path = "/editar/{id}")
   public ModelAndView editar(@PathVariable Long id) {
-    ModelAndView mv = new ModelAndView("/pacientes/form-pacientes");
+    ModelAndView mv = new ModelAndView("auth/usuario/pacientes/form-pacientes");
     Paciente paciente = pacienteRepository.findById(id).get();
     mv.addObject("paciente", paciente);
 
@@ -80,7 +80,7 @@ public class PacienteController {
 
   @PostMapping(path = "/salvar")
   public ModelAndView salvar(@Valid Paciente paciente, BindingResult result) {
-    ModelAndView mv = new ModelAndView("/pacientes/form-pacientes");
+    ModelAndView mv = new ModelAndView("auth/usuario/pacientes/form-pacientes");
 
     if (result.hasErrors()) {
       return mv;
@@ -98,7 +98,7 @@ public class PacienteController {
 
   @GetMapping(path = "/detalhes/{id}")
   public ModelAndView detalhes(@PathVariable Long id) {
-    ModelAndView mv = new ModelAndView("/pacientes/detalhes-paciente");
+    ModelAndView mv = new ModelAndView("auth/usuario/pacientes/detalhes-paciente");
     Paciente paciente = pacienteRepository.findById(id).get();
     mv.addObject("paciente", paciente);
     List<Consulta> consultas = consultaRepository.findByPacienteId(id);
