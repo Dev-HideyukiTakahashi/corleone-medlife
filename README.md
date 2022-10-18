@@ -296,7 +296,12 @@
     <summary><strong>Imagens</strong></summary>
     </br>
     <hr>
-    //TODO
+     <img src="img/1.JPG" alt="login">
+    <hr>
+    <img src="img/2.JPG" alt="main">
+    <hr>
+    <img src="img/3.JPG" alt="config">
+    <hr>
     </details>
 </div>
 
