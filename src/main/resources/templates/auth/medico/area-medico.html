@@ -1,0 +1,177 @@
+<!--
+=========================================================
+* * Black Dashboard - v1.0.1
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/black-dashboard
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <!--Fragmento Head-->
+  <div th:replace="fragments/head :: head"></div>
+
+  <body class="">
+    <div class="wrapper">
+      <!-- Sidebar Fragment -->
+      <div th:replace="fragments/sidebar :: sidebar"></div>
+      <div class="main-panel">
+        <!-- Navbar Fragment -->
+        <div th:replace="fragments/navbar :: navbar"></div>
+        <!--Main-->
+        <div class="content">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card card-plain">
+                <div class="card-header">
+                  <h4 class="card-title">Minhas Consultas</h4>
+                  <form
+                    class="form-inline my-2 my-lg-0"
+                    action="/medico/buscar"
+                  >
+                    <input
+                      class="form-control mr-sm-2"
+                      type="number"
+                      placeholder="Digite o código"
+                      aria-label="Search"
+                      name="id"
+                      autocomplete="off"
+                      required
+                    />
+                    <button
+                      class="btn btn-outline-success my-2 my-sm-0"
+                      type="submit"
+                    >
+                      Buscar
+                    </button>
+                    <a
+                      class="btn btn-outline-success my-2 my-sm-0"
+                      th:href="@{/consultas/salvar}"
+                    >
+                      Marcar Consulta
+                    </a>
+                    <span class="text-warning" style="margin-left: 15%"></span>
+                    <span
+                      class="text-success"
+                      th:if="${sucesso}"
+                      style="margin-left: 15%"
+                      th:text="${sucesso}"
+                    ></span>
+                  </form>
+                </div>
+                <span class="ml-4 mt-1" th:text="${registros}"></span>
+                <div class="card-body mt-3">
+                  <div>
+                    <table class="table tablesorter" id="">
+                      <thead class="text-primary">
+                        <tr>
+                          <th>Cod.</th>
+                          <th>Data</th>
+                          <th>Paciente</th>
+                          <th>Médico</th>
+                          <th>Status</th>
+                          <th class="text-center">Editar</th>
+                          <th class="text-center">Detalhes</th>
+                        </tr>
+                      </thead>
+                      <tbody th:each=" c : ${consultas}">
+                        <tr>
+                          <td th:text="${c.id}"></td>
+                          <td th:text="${{c.data}}"></td>
+                          <td th:text="${c.paciente.nome}"></td>
+                          <td th:text="${c.medico.nome}"></td>
+                          <td th:text="${c.status}"></td>
+                          <td class="text-center">
+                            <a
+                              class="tim-icons icon-refresh-01"
+                              th:href="@{/consultas/editar/{id}(id=${c.id})}"
+                            ></a>
+                          </td>
+                          <td class="text-center">
+                            <a
+                              class="tim-icons icon-zoom-split"
+                              th:href="@{/consultas/detalhes/{id}(id=${c.id})}"
+                            ></a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!--Paginação-->
+                  <div class="mt-5" th:if="${lista}">
+                    <ul class="pagination justify-content-center">
+                      <li class="page-item" th:if="${consultas.hasPrevious()}">
+                        <a
+                          class="page-link"
+                          th:href="@{/consultas(page=${consultas.number - 1})}"
+                          aria-label="Previous"
+                        >
+                          <span aria-hidden="true">&laquo;</span>
+                          <span class="sr-only">Anterior</span>
+                        </a>
+                      </li>
+
+                      <li
+                        class="page-item"
+                        th:each=" i: ${#numbers.sequence(0, consultas.totalPages - 1)}"
+                      >
+                        <a
+                          style="background-color: #ba54f5"
+                          class="page-link"
+                          th:href="@{/consultas(page=${i})}"
+                          th:if="${i == consultas.number}"
+                          >[[${i + 1}]]</a
+                        >
+                        <a
+                          class="page-link"
+                          th:href="@{/consultas(page=${i})}"
+                          th:if="${i != consultas.number}"
+                          >[[${i + 1}]]</a
+                        >
+                      </li>
+
+                      <li class="page-item" th:if="${consultas.hasNext()}">
+                        <a
+                          class="page-link"
+                          th:href="@{/consultas(page=${consultas.number + 1})}"
+                          aria-label="Next"
+                        >
+                          <span aria-hidden="true">&raquo;</span>
+                          <span class="sr-only">Próximo</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <!--Paginação-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--End Main-->
+        <!--Footer fragment-->
+        <div th:replace="fragments/footer :: footer"></div>
+      </div>
+    </div>
+    <!--Colortheme fragment-->
+    <div th:replace="fragments/colortheme :: colortheme"></div>
+    <!-- Adicionando JQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+
+    <!--Javascript fragment-->
+    <div th:replace="fragments/javascript :: javascript"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+  </body>
+</html>

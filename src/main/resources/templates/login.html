@@ -33,8 +33,15 @@
       <h3>Entrar no Sistema</h3>
       <form th:action="@{/login}" method="post">
         <div class="inputBox">
-          <input id="uname" type="text" name="username" placeholder="Login" />
           <input
+            id="uname"
+            type="text"
+            name="username"
+            placeholder="Login"
+            autocomplete="off"
+          />
+          <input
+            autocomplete="off"
             id="pass"
             type="password"
             name="password"

@@ -23,6 +23,7 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
         .antMatchers("/").permitAll()
         .antMatchers("/admin/**").hasAnyRole("ADMIN")
+        .antMatchers("/medico/**").hasAnyRole("ADMIN", "MEDICO")
         .antMatchers("/consultas/**").hasAnyRole("ADMIN", "ATENDENTE", "MEDICO")
         .antMatchers("/pacientes/**").hasAnyRole("ADMIN", "ATENDENTE", "MEDICO")
         .antMatchers("/contatos").hasAnyRole("ADMIN", "ATENDENTE", "MEDICO")
