@@ -6,4 +6,6 @@ import br.com.corleone.medlife.model.entities.Medico;
 
 public interface MedicoRepository extends JpaRepository<Medico, Long> {
 
+  Medico findByNome(String nome);
+
 }
