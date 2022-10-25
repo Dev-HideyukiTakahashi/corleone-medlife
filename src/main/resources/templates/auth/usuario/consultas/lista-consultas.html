@@ -43,7 +43,13 @@
                       aria-label="Search"
                       name="id"
                       autocomplete="off"
-                      required
+                    />
+                    <input
+                      class="form-control mr-sm-2"
+                      type="date"
+                      aria-label="Search"
+                      name="data"
+                      autocomplete="off"
                     />
                     <button
                       class="btn btn-outline-success my-2 my-sm-0"
@@ -51,6 +57,7 @@
                     >
                       Buscar
                     </button>
+
                     <a
                       class="btn btn-outline-success my-2 my-sm-0"
                       th:href="@{/consultas/salvar}"

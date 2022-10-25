@@ -1,7 +1,9 @@
 package br.com.corleone.medlife.controller;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -19,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.corleone.medlife.model.entities.Consulta;
-import br.com.corleone.medlife.model.entities.Paciente;
 import br.com.corleone.medlife.model.enums.Status;
 import br.com.corleone.medlife.repository.ConsultaRepository;
 import br.com.corleone.medlife.repository.MedicoRepository;
@@ -47,10 +48,21 @@ public class ConsultaController {
   }
 
   @GetMapping(path = "/buscar")
-  public ModelAndView buscarPorId(@RequestParam(name = "id") Long id) {
+  public ModelAndView buscarPorId(@RequestParam(name = "id") String id, @RequestParam(name = "data") String data) {
     ModelAndView mv = new ModelAndView("/auth/usuario/consultas/lista-consultas");
-    Optional<Consulta> optional = consultaRepository.findById(id);
 
+    if (id.isEmpty() && data.isEmpty()) {
+      mv.addObject("registros", "Argumento de busca inválido");
+      return mv;
+    }
+
+    if (!data.isEmpty()) {
+      List<Consulta> consultas = consultaRepository.findByData(Date.valueOf(data));
+      mv.addObject("registros", consultas.size() + " consultas localizadas.");
+      mv.addObject("consultas", consultas);
+      return mv;
+    }
+    Optional<Consulta> optional = consultaRepository.findById(Long.parseLong(id));
     if (optional.isPresent()) {
       mv.addObject("consultas", optional.get());
       mv.addObject("registros", "Consulta localizada.");
