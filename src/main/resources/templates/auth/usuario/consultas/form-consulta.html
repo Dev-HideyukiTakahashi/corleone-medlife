@@ -1,0 +1,183 @@
+<!--
+=========================================================
+* * Black Dashboard - v1.0.1
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/black-dashboard
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <!--Fragmento Head-->
+  <div th:replace="fragments/head :: head"></div>
+
+  <body class="">
+    <div class="wrapper">
+      <!-- Sidebar Fragment -->
+      <div th:replace="fragments/sidebar :: sidebar"></div>
+      <div class="main-panel">
+        <!-- Navbar Fragment -->
+        <div th:replace="fragments/navbar :: navbar"></div>
+        <!--Main-->
+        <div class="content">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">Marcar Consulta</h4>
+                </div>
+                <div class="card-body">
+                  <form
+                    th:action="@{/consultas/salvar}"
+                    method="post"
+                    th:object="${consulta}"
+                  >
+                    <div class="form-row">
+                      <div class="form-group col-md-2">
+                        <label>Data</label>
+                        <input
+                          required
+                          autocomplete="off"
+                          type="date"
+                          class="form-control"
+                          name="novaData"
+                          th:value="${novaData}"
+                        />
+                      </div>
+                      <div class="form-group col-md-2">
+                        <label>Hora</label>
+                        <input
+                          required
+                          autocomplete="off"
+                          type="time"
+                          class="form-control"
+                          name="novaHora"
+                          th:value="${novaHora}"
+                        />
+                      </div>
+                      <div class="form-group col-md-9"></div>
+                      <div class="form-group col-md-5">
+                        <label>Histórico</label>
+                        <input
+                          autocomplete="off"
+                          th:field="*{historico}"
+                          class="form-control text-white"
+                          name="historico"
+                          th:errorclass="is-invalid"
+                        />
+                        <span
+                          class="invalid-feedback"
+                          th:errors="*{historico}"
+                        ></span>
+                      </div>
+                      <div class="form-group col-md-7"></div>
+                      <div class="form-group col-md-3">
+                        <label>Medico</label>
+                        <input
+                          th:field="*{medico.id}"
+                          type="hidden"
+                          name="medicoId"
+                        />
+                        <select
+                          required
+                          class="custom-select"
+                          style="
+                            border: 1px solid #2b3553;
+                            border-radius: 0.4285rem;
+                          "
+                          name="medico.nome"
+                        >
+                          <option
+                            selected
+                            value=""
+                            th:if="${consulta.medico.nome == null}"
+                          >
+                            Selecione o Médico
+                          </option>
+                          <option
+                            th:if="${consulta.medico.nome != null}"
+                            th:text="${consulta.medico.nome}"
+                          ></option>
+                          <option
+                            style="color: black"
+                            th:each=" m : ${medicos}"
+                            th:text="${m.nome}"
+                            th:value="${m.nome}"
+                          ></option>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-3">
+                        <label>Paciente</label>
+
+                        <select
+                          required
+                          class="custom-select"
+                          style="
+                            border: 1px solid #2b3553;
+                            border-radius: 0.4285rem;
+                          "
+                          name="paciente.id"
+                        >
+                          <option selected value="">
+                            Selecione o Paciente
+                          </option>
+                          <option
+                            style="color: black"
+                            th:each=" p : ${pacientes}"
+                            th:text="${p.nome}"
+                            th:value="${p.id}"
+                          ></option>
+                        </select>
+                        <input
+                          type="hidden"
+                          th:field="*{paciente.id}"
+                          name="paciente.id"
+                        />
+                      </div>
+                      <div class="form-group col-md-9"></div>
+                      <div class="form-group col-md-8">
+                        <label>Triagem</label>
+                        <textarea
+                          name="triagem"
+                          style="border: 1px solid #2b3553"
+                          th:field="*{triagem}"
+                          class="form-control text-white"
+                          rows="40"
+                          th:errorclass="is-invalid"
+                        ></textarea>
+                        <span
+                          class="invalid-feedback"
+                          th:errors="*{triagem}"
+                        ></span>
+                      </div>
+                    </div>
+                    <button
+                      type="submit"
+                      class="btn btn-outline-success my-2 my-sm-0"
+                    >
+                      Salvar
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--End Main-->
+        <!--Footer fragment-->
+        <div th:replace="fragments/footer :: footer"></div>
+      </div>
+    </div>
+    <!--Colortheme fragment-->
+    <div th:replace="fragments/colortheme :: colortheme"></div>
+    <!--Javascript fragment-->
+    <div th:replace="fragments/javascript :: javascript"></div>
+  </body>
+</html>

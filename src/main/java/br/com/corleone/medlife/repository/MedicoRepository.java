@@ -8,4 +8,6 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
 
   Medico findByNome(String nome);
 
+  Medico findByCrm(String crm);
+
 }

@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -28,7 +29,10 @@ public class Consulta {
   @DateTimeFormat(pattern = "dd/MM/yyyy - HH:mm")
   private LocalDateTime data;
 
+  @NotBlank(message = "Questione os sintomas do paciente.")
   private String triagem;
+
+  @NotBlank(message = "Preencha o histórico de atendimento conosco.")
   private String historico;
 
   @ManyToOne
