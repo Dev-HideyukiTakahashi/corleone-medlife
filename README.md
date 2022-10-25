@@ -243,11 +243,9 @@
         </li>
         <li>View atendente profile: view de lista dinâmica com todos pacientes, com opção de editar, enviar mensagem via API whattsap.
         </li>
-        <li>//TODO View atendente profile: view com lista das consultas agendadas, com opção de remarcar, cancelar, encaminhar para determinado médico.
+        <li>View atendente profile: view com lista das consultas agendadas, com opção de remarcar, cancelar, encaminhar para determinado médico.
         </li>
-        <li>//TODO View atendente profile: view com dados dos médicos para consulta de dados.
-        </li>
-        <li>//TODO View atendente profile: configurações de perfil ( alteração de telefone, email, foto ).
+        <li>View atendente profile: view com dados dos médicos para consulta de dados.
         </li>
         <li>//TODO View médico profile: view com lista de consultas que foram encaminhadas pelo atendente, com opção de finalizar e remarcar.
         </li>
@@ -263,11 +261,11 @@
       <hr>
       <span>Task 2 - Spring security, autenticando o sistema e autorizando páginas de acordo com o perfil.</span>
       <ul>
-        <li>//TODO Validação com banco de dados, login/senha.
+        <li>Validação com banco de dados, login/senha.
         </li>
-        <li>//TODO Validação para não acessar nenhuma página do sistema sem estar logado.
+        <li>Validação para não acessar nenhuma página do sistema sem estar logado.
         </li>
-        <li>//TODO O usuário 'admin' tem acesso total ao sistema.
+        <li>O usuário 'admin' tem acesso total ao sistema.
         </li>
         <li>//TODO View admin-profile: view do log que contém alterações de data da consulta, ou cancelamento de consulta.
         </li>
@@ -301,6 +299,8 @@
     <img src="img/2.JPG" alt="main">
     <hr>
     <img src="img/3.JPG" alt="config">
+    <hr>
+    <img src="img/4.JPG" alt="config">
     <hr>
     </details>
 </div>
