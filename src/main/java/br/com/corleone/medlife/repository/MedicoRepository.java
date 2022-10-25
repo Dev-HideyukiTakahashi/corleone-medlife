@@ -10,4 +10,6 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
 
   Medico findByCrm(String crm);
 
+  Medico findByLogin(String login);
+
 }

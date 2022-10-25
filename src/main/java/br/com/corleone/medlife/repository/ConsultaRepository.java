@@ -20,4 +20,7 @@ public interface ConsultaRepository extends JpaRepository<Consulta, Long> {
 
   @Query(nativeQuery = true, value = "SELECT * FROM tb_consultas WHERE (CAST(data AS DATE) = :data)")
   Page<Consulta> findByData(Date data, Pageable pageable);
+
+  @Query(nativeQuery = true, value = "SELECT * FROM tb_consultas WHERE status = 'ENCAMINHADA' AND medico_id = :id")
+  Page<Consulta> findConsultasByMedicoid(Long id, Pageable pageable);
 }

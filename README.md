@@ -222,7 +222,7 @@
         </li>
         <li>Database seeding para testes.
         </li>
-        <li>//TODO Controller com CRUD completo para entidades médico, paciente, atendente, consulta, com testes no h2.
+        <li>Controller com CRUD completo para entidades médico, paciente, atendente, consulta, com testes no h2.
         </li>
         <li>//TODO Parte de configurações de usuário com Upload de foto de perfil, salvando no banco de dados.
         </li>
@@ -247,9 +247,9 @@
         </li>
         <li>View atendente profile: view com dados dos médicos para consulta de dados.
         </li>
-        <li>//TODO View médico profile: view com lista de consultas que foram encaminhadas pelo atendente, com opção de finalizar e remarcar.
+        <li>View médico profile: view com lista de consultas que foram encaminhadas pelo atendente, com opção de finalizar e remarcar.
         </li>
-        <li>//TODO View médico profile: view da consulta em andamento para registro de informações sobre.
+        <li>View médico profile: view da consulta em andamento para registro de informações sobre.
         </li>
         <li>//TODO View médico profile: view do relatório para solicitar exames ou medicamentos.
         </li>
