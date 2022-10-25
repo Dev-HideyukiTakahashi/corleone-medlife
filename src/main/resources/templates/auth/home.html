@@ -43,9 +43,18 @@
                           src="img/default-avatar.png"
                           alt="foto-usuário"
                         />
-                        <h5 class="title">Usuario do sistema</h5>
+                        <h5 class="title" sec:authentication="name">
+                          Usuario do sistema
+                        </h5>
                       </a>
-                      <p class="description">Função</p>
+                      <p
+                        class="description"
+                        th:each="authority : ${#authentication.getAuthorities()}"
+                        th:if="${authority.getAuthority().startsWith('ROLE_')}"
+                        th:text="${authority.getAuthority().replaceFirst('ROLE_', '')}"
+                      >
+                        Função
+                      </p>
                     </div>
                   </div>
                   <div class="card-description text-center">
