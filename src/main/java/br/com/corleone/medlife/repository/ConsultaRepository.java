@@ -3,6 +3,8 @@ package br.com.corleone.medlife.repository;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -15,4 +17,7 @@ public interface ConsultaRepository extends JpaRepository<Consulta, Long> {
 
   @Query(nativeQuery = true, value = "SELECT * FROM tb_consultas WHERE (CAST(data AS DATE) = :data)")
   List<Consulta> findByData(Date data);
+
+  @Query(nativeQuery = true, value = "SELECT * FROM tb_consultas WHERE (CAST(data AS DATE) = :data)")
+  Page<Consulta> findByData(Date data, Pageable pageable);
 }

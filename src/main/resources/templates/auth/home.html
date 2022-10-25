@@ -89,46 +89,68 @@
                   <table class="table tablesorter" id="">
                     <thead class="text-primary">
                       <tr>
-                        <th>//TODO</th>
-                        <th>//TODO</th>
-                        <th>//TODO</th>
-                        <th class="text-center">//TODO</th>
+                        <th>Cod.</th>
+                        <th>Data</th>
+                        <th>Paciente</th>
+                        <th>Médico</th>
+                        <th>Status</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <td>//TODO</td>
-                        <td>//TODO</td>
-                        <td>//TODO</td>
-                        <td class="text-center">//TODO</td>
-                      </tr>
-                      <tr>
-                        <td>//TODO</td>
-                        <td>//TODO</td>
-                        <td>//TODO</td>
-                        <td class="text-center">//TODO</td>
-                      </tr>
-                      <tr>
-                        <td>//TODO</td>
-                        <td>//TODO</td>
-                        <td>//TODO</td>
-                        <td class="text-center">//TODO</td>
-                      </tr>
-                      <tr>
-                        <td>//TOD</td>
-                        <td>//TODO</td>
-                        <td>//TODO</td>
-                        <td class="text-center">//TODO</td>
-                      </tr>
-                      <tr>
-                        <td>//TODO</td>
-                        <td>//TODO</td>
-                        <td>//TODO</td>
-                        <td class="text-center">//TODO</td>
-                      </tr>
+                    <tbody th:each=" c : ${consultas}">
+                      <td th:text="${c.id}"></td>
+                      <td th:text="${{c.data}}"></td>
+                      <td th:text="${c.paciente.nome}"></td>
+                      <td th:text="${c.medico.nome}"></td>
+                      <td th:text="${c.status}"></td>
                     </tbody>
                   </table>
                 </div>
+                <!--Paginação-->
+                <div class="mt-5" th:if="${lista}">
+                  <ul class="pagination justify-content-center">
+                    <li class="page-item" th:if="${consultas.hasPrevious()}">
+                      <a
+                        class="page-link"
+                        th:href="@{/home(page=${consultas.number - 1})}"
+                        aria-label="Previous"
+                      >
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Anterior</span>
+                      </a>
+                    </li>
+
+                    <li
+                      class="page-item"
+                      th:each=" i: ${#numbers.sequence(0, consultas.totalPages - 1)}"
+                    >
+                      <a
+                        style="background-color: #ba54f5"
+                        class="page-link"
+                        th:href="@{/home(page=${i})}"
+                        th:if="${i == consultas.number}"
+                        >[[${i + 1}]]</a
+                      >
+                      <a
+                        class="page-link"
+                        th:href="@{/home(page=${i})}"
+                        th:if="${i != consultas.number}"
+                        >[[${i + 1}]]</a
+                      >
+                    </li>
+
+                    <li class="page-item" th:if="${consultas.hasNext()}">
+                      <a
+                        class="page-link"
+                        th:href="@{/home(page=${consultas.number + 1})}"
+                        aria-label="Next"
+                      >
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Próximo</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <!--Paginação-->
               </div>
             </div>
           </div>
