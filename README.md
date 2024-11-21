@@ -4,7 +4,7 @@
 
 <h1 align="center">Corleone-MedLife</h1>
 <hr>
-<h3 align="center">Aplicação para uma uma clínica que faz consultas médicas, atendente realiza o cadastro do paciente para consulta e o médico realiza a mesma.</h3>
+<h3 align="center">Aplicação autoral para uma uma clínica que faz consultas médicas, atendente realiza o cadastro do paciente para consulta e o médico realiza a mesma.</h3>
 <hr>
 </br>
 <div align="center">
